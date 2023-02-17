@@ -5,8 +5,10 @@ const  helmet= require('helmet');
 const  morgan= require('morgan');
 const userRoute=require('./routes/users')
 const authRoute=require('./routes/auth')
+const postRoute=require('./routes/posts')
 
 const app=express()
+
 //connecting database
 mongoose.set('strictQuery', true);
 dotenv.config()
@@ -20,8 +22,11 @@ app.use(helmet())
 app.use(morgan("common"))
 
 //REST API
+app.use("/post",postRoute) 
 app.use("/",userRoute)
 app.use("/auth",authRoute)
+
+
  
 app.listen(3001,()=>{
     console.log('Server started running!');

@@ -18,7 +18,7 @@ router.post('/register',async(req,res)=>{
     
         })
 
-        //saving user and sendig response
+        //saving(cloud) user and sendig response
         const user=await newUser.save() 
         res.status(200).json(user)
     }
