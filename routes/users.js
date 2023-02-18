@@ -2,6 +2,9 @@ const router = require('express').Router()
 const bcrypt= require('bcrypt')
 const User=require('../models/User')
 
+//handling default browser req /favicon.ico 
+//router.get('/favicon.ico', (req, res) => res.status(204));
+
 //update user
 router.put('/:id',async(req,res)=>{
     if(req.body.userId===req.params.id || req.body.isAdmin){
@@ -42,10 +45,14 @@ router.delete('/:id',async(req,res)=>{
 })
 
 //get a users
-router.get('/:id',async(req,res)=>{
-    console.log('ja')
+router.get("/user",async(req,res)=>{
+    console.log("okkkkkkkkkkk");
+    const userId=req.query.userId
+    const username=req.query.username
     try{
-        const user = await User.findById(req.params.id)
+        const user =userId 
+        ? await User.findById(userId)
+        :await User.findOne({username:username})
         const {password,updatedAt,...other}=user._doc
         res.status(200).json(other)
     }catch(err){

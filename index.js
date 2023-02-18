@@ -25,8 +25,6 @@ app.use(morgan("common"))
 app.use("/post",postRoute) 
 app.use("/",userRoute)
 app.use("/auth",authRoute)
-
-
  
 app.listen(3001,()=>{
     console.log('Server started running!');
