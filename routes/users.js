@@ -29,12 +29,9 @@ router.put('/:id',async(req,res)=>{
 
 //delete user
 router.delete('/:id',async(req,res)=>{
-    console.log('jaaa4');
     if(req.body.userId===req.params.id || req.body.isAdmin){
         try{
-            console.log('jaaa4');
             const user = await User.findByIdAndDelete(req.params.id)
-            console.log('jaaa4');
             res.status(200).json("Acount has been deleted")
         }catch(err){
             return res.status(500).json(err)
@@ -46,7 +43,6 @@ router.delete('/:id',async(req,res)=>{
 
 //get a users
 router.get("/user",async(req,res)=>{
-    console.log("okkkkkkkkkkk");
     const userId=req.query.userId
     const username=req.query.username
     try{
@@ -56,6 +52,29 @@ router.get("/user",async(req,res)=>{
         const {password,updatedAt,...other}=user._doc
         res.status(200).json(other)
     }catch(err){
+        res.status(500).json(err)
+    }
+})
+
+//get following friends
+
+router.get("/friends/:userId",async(req,res)=>{
+    try {
+       const user=await  User.findById(req.params.userId)
+       const friends=await Promise.all(
+        user.followings.map(friendId=>{
+            return User.findById(friendId)
+        })
+       )
+       console.log(friends)
+       let friendList=[];
+       friends.map(friend=>{
+        const {_id,username,profilePicture}=friend
+        friendList.push({_id,username,profilePicture})
+       })
+       console.log(friendList);
+       res.status(200).json(friendList)
+    } catch (err) {
         res.status(500).json(err)
     }
 })
