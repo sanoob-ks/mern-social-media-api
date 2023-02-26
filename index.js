@@ -6,6 +6,8 @@ const  morgan= require('morgan');
 const userRoute=require('./routes/users')
 const authRoute=require('./routes/auth')
 const postRoute=require('./routes/posts')
+const conversationRoute=require('./routes/conversations')
+const messageRoute=require('./routes/messages')
 const path=require('path')
 const multer  = require('multer')
 
@@ -48,6 +50,8 @@ app.post('/upload', upload.single('file'), function (req, res) {
 
 
 //REST API
+app.use("/conversation",conversationRoute) 
+app.use("/message",messageRoute) 
 app.use("/post",postRoute) 
 app.use("/auth",authRoute)
 app.use("/",userRoute)
