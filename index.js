@@ -53,7 +53,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
 app.use("/conversation",conversationRoute) 
 app.use("/message",messageRoute) 
 app.use("/post",postRoute) 
-app.use("/auth",authRoute)
+app.use("/auth",authRoute) 
 app.use("/",userRoute)
 
  

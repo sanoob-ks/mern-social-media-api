@@ -3,7 +3,7 @@ const Message=require('../models/Message')
 
 //Add message
 router.post("/",async(req,res)=>{
-    const newMessage = new Message(req.body)
+    const newMessage = new Message(req.body) 
 
     try {
         const savedMessage = await newMessage.save()

@@ -3,7 +3,7 @@ const bcrypt= require('bcrypt')
 const User=require('../models/User')
 
 //handling default browser req /favicon.ico 
-//router.get('/favicon.ico', (req, res) => res.status(204));
+//router.get('/favicon.ico', (req, res) => res.status(204)); 
 
 //update user
 router.put('/:id',async(req,res)=>{
